@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>OnlineTicketShop</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <h1>Welcome to my OnlineTicketShop!</h1>
-    <h2>home.html</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Poster</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Buy</th>
+        </tr>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.name}"></td>
+            <td><img th:src="${ticket.posterUrl}"/></td>
+            <td th:text="${#temporals.format(ticket.date, 'YYYY:MM:dd HH:mm')}"></td>
+            <td th:text="${ticket.price}"></td>
+            <td><a href="/order">Click to buy!</a></td>
+        </tr>
+    </table>
 </body>
 </html>
