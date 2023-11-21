@@ -17,7 +17,9 @@
         </tr>
         <tr th:each="ticket : ${tickets}">
             <td th:text="${ticket.name}"></td>
-            <td><img th:src="${ticket.posterUrl}"/></td>
+            <td>
+                <img th:if="${ticket.posterUrl != null and ticket.posterUrl != ''}" th:src="${ticket.posterUrl}"/>
+            </td>
             <td th:text="${#temporals.format(ticket.date, 'YYYY:MM:dd HH:mm')}"></td>
             <td th:text="${ticket.price}"></td>
             <td><a href="/order">Click to buy!</a></td>

@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-h1 {
+h1,h2 {
     text-align: center;
 }
 table, th, td {
