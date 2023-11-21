@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>OnlineTicketShop</title>
@@ -7,15 +7,15 @@
 </head>
 <body>
     <h1>Complete your order!</h1>
-    <form>
+    <form th:action="@{/order}" th:method="post">
+        <input type="hidden" th:name="ticketId" th:value="${ticketId}" />
         <label for="firstName">First name:</label>
         <input type="text" id="firstName" name="firstName" required><br><br>
         <label for="lastName">Last name:</label>
         <input type="text" id="lastName" name="lastName" required><br><br>
         <label for="phoneNumber">Phone number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
-<!--        <input type="submit" value="Buy!">-->
-        <a href="/orderComplete" class="btn btn-primary">Buy!</a>
+        <button type="submit">Complete Order</button>
     </form>
 </body>
 </html>

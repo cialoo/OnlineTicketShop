@@ -22,7 +22,11 @@
             </td>
             <td th:text="${#temporals.format(ticket.date, 'YYYY:MM:dd HH:mm')}"></td>
             <td th:text="${ticket.price}"></td>
-            <td><a href="/order">Click to buy!</a></td>
+            <td>
+                <form th:action="@{/order/{ticketId}(ticketId=${ticket.id})}" th:method="get">
+                    <button type="submit">Add</button>
+                </form>
+            </td>
         </tr>
     </table>
 </body>
