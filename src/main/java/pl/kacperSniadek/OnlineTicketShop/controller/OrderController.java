@@ -31,6 +31,6 @@ public class OrderController {
         order.setPhoneNumber(phoneNumber);
         orderRepository.save(order);
 
-        return "orderComplete";
+        return "redirect:/orderComplete";
     }
 }

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>OnlineTicketShop</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <h1>Order Completed!</h1>
-    <div id="download">
-        <p>Download ticket</p>
-        <input type="button" value="Download!">
-    </div>
+    <h2>Your order is complete!</h2>
+
+    <form action="/orderComplete/generatePDF" method="get">
+        <button type="submit">Download Ticket</button>
+    </form>
 </body>
 </html>
