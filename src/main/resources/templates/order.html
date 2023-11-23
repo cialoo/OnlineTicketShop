@@ -9,6 +9,7 @@
     <h1>Complete your order!</h1>
     <form th:action="@{/order}" th:method="post">
         <input type="hidden" th:name="ticketId" th:value="${ticketId}" />
+        <input type="hidden" th:name="name" th:value="${name}" />
         <label for="firstName">First name:</label>
         <input type="text" id="firstName" name="firstName" required><br><br>
         <label for="lastName">Last name:</label>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import pl.kacperSniadek.OnlineTicketShop.service.PDFMakerService;
 
 import java.io.IOException;
@@ -22,25 +23,21 @@ public class PDFMakerController {
     }
 
     @GetMapping
-    public String showOrderCompletePage(Model model) {
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-
-        model.addAttribute("filename", "pdf_" + currentDateTime + ".pdf");
-
+    public String showOrderCompletePage() {
         return "orderComplete";
     }
 
     @GetMapping("/generatePDF")
-    public void generatePDF(HttpServletResponse response) throws IOException {
+    public void generatePDF(HttpServletResponse response, @SessionAttribute String name,
+                            @SessionAttribute String firstName, @SessionAttribute String lastName) throws IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=Ticket_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        this.pdfMakerService.export(response);
+        this.pdfMakerService.export(response, name, firstName, lastName);
     }
 }
