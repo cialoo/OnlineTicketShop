@@ -1,6 +1,7 @@
 package pl.kacperSniadek.OnlineTicketShop.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.Date;
 public class PDFMakerController {
     private final PDFMakerService pdfMakerService;
 
+    @Autowired
     public PDFMakerController(PDFMakerService pdfMakerService) {
         this.pdfMakerService = pdfMakerService;
     }

@@ -22,4 +22,5 @@ public class Ticket {
     private String posterUrl;
     private LocalDateTime date;
     private BigDecimal price;
+    private int numberOfSeats;
 }

@@ -4,7 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kacperSniadek.OnlineTicketShop.model.Order;
+import pl.kacperSniadek.OnlineTicketShop.model.Ticket;
 import pl.kacperSniadek.OnlineTicketShop.repository.OrderRepository;
+import pl.kacperSniadek.OnlineTicketShop.repository.TicketRepository;
+import pl.kacperSniadek.OnlineTicketShop.service.TicketService;
 
 @Controller
 @RequestMapping("/order")
@@ -12,9 +15,11 @@ import pl.kacperSniadek.OnlineTicketShop.repository.OrderRepository;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final TicketService ticketService;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, TicketService ticketService) {
         this.orderRepository = orderRepository;
+        this.ticketService = ticketService;
     }
 
     @GetMapping("/{ticketId}/{name}")
@@ -32,6 +37,8 @@ public class OrderController {
         order.setLastName(lastName);
         order.setPhoneNumber(phoneNumber);
         orderRepository.save(order);
+
+        ticketService.decreaseSeats(ticketId);
 
         model.addAttribute("name", name);
         model.addAttribute("firstName", firstName);
