@@ -22,10 +22,11 @@
                 <img th:if="${ticket.posterUrl != null and ticket.posterUrl != ''}" th:src="${ticket.posterUrl}"/>
             </td>
             <td th:text="${#temporals.format(ticket.date, 'YYYY:MM:dd HH:mm')}"></td>
+            <td th:text="${ticket.location}"></td>
             <td th:text="${ticket.numberOfSeats}"></td>
             <td th:text="${ticket.price} + ' zł'"> </td>
             <td>
-                <form th:action="@{/order/{ticketId}/{name}(ticketId=${ticket.id}, name=${ticket.name})}" th:method="get">
+                <form th:action="@{/order/{ticketId}/{name}/{location}(ticketId=${ticket.id}, name=${ticket.name}, location=${ticket.location})}" th:method="get">
                     <button th:if="${ticket.numberOfSeats > 0}" type="submit">Add</button>
                     <span th:if="${ticket.numberOfSeats <= 0}">Sold Out</span>
                 </form>

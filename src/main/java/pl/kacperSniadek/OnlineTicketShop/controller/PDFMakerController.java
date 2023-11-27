@@ -31,7 +31,7 @@ public class PDFMakerController {
 
     @GetMapping("/generatePDF")
     public void generatePDF(HttpServletResponse response, @SessionAttribute String name,
-                            @SessionAttribute String firstName, @SessionAttribute String lastName) throws IOException {
+                            @SessionAttribute String firstName, @SessionAttribute String lastName, @SessionAttribute String location) throws IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
@@ -40,6 +40,6 @@ public class PDFMakerController {
         String headerValue = "attachment; filename=Ticket_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        this.pdfMakerService.export(response, name, firstName, lastName);
+        this.pdfMakerService.export(response, name, firstName, lastName, location);
     }
 }

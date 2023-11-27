@@ -11,7 +11,7 @@ import pl.kacperSniadek.OnlineTicketShop.service.TicketService;
 
 @Controller
 @RequestMapping("/order")
-@SessionAttributes({"name", "firstName", "lastName"})
+@SessionAttributes({"name", "firstName", "lastName", "location"})
 public class OrderController {
 
     private final OrderRepository orderRepository;
@@ -22,15 +22,22 @@ public class OrderController {
         this.ticketService = ticketService;
     }
 
-    @GetMapping("/{ticketId}/{name}")
-    public String order(@PathVariable Long ticketId, @PathVariable String name, Model model) {
+    @GetMapping("/{ticketId}/{name}/{location}")
+    public String order(@PathVariable Long ticketId, @PathVariable String name, @PathVariable String location, Model model) {
         model.addAttribute("ticketId", ticketId);
         model.addAttribute("name", name);
+        model.addAttribute("location", location);
         return "order";
     }
 
     @PostMapping
-    public String takeOrder(Model model, @RequestParam Long ticketId, @RequestParam String name, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String phoneNumber) {
+    public String takeOrder(Model model,
+                            @RequestParam Long ticketId,
+                            @RequestParam String name,
+                            @RequestParam String location,
+                            @RequestParam String firstName,
+                            @RequestParam String lastName,
+                            @RequestParam String phoneNumber) {
         Order order = new Order();
         order.setTicketId(ticketId);
         order.setFirstName(firstName);
@@ -41,6 +48,7 @@ public class OrderController {
         ticketService.decreaseSeats(ticketId);
 
         model.addAttribute("name", name);
+        model.addAttribute("location", location);
         model.addAttribute("firstName", firstName);
         model.addAttribute("lastName", lastName);
 

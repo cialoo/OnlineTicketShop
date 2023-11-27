@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @Service
 public class PDFMakerService {
-    public void export(HttpServletResponse response, String NameOfTicket, String firstName, String lastName ) throws IOException {
+    public void export(HttpServletResponse response, String NameOfTicket, String firstName, String lastName, String location ) throws IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
 
@@ -25,12 +25,15 @@ public class PDFMakerService {
 
         Paragraph paragraph2 = new Paragraph("Your ticket to show!", fontParagraph);
         paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
-        Paragraph paragraph3 = new Paragraph(firstName + " " + lastName, fontParagraph);
+        Paragraph paragraph3 = new Paragraph(location, fontParagraph);
+        paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
+        Paragraph paragraph4 = new Paragraph(firstName + " " + lastName, fontParagraph);
         paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
 
         document.add(paragraph);
         document.add(paragraph2);
         document.add(paragraph3);
+        document.add(paragraph4);
 
         document.close();
     }

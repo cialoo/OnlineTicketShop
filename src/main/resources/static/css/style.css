@@ -23,3 +23,21 @@ form {
 #download {
     text-align: center;
 }
+
+table.seats {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+table.seats td {
+  padding: 0;
+}
+
+table.seats button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
