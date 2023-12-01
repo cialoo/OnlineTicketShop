@@ -3,11 +3,10 @@ package pl.kacperSniadek.OnlineTicketShop.controller;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import pl.kacperSniadek.OnlineTicketShop.service.PDFMakerService;
+import pl.kacperSniadek.OnlineTicketShop.service.TicketMakerService;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -16,12 +15,12 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/orderComplete")
-public class PDFMakerController {
-    private final PDFMakerService pdfMakerService;
+public class TicketMakerController {
+    private final TicketMakerService ticketMakerService;
 
     @Autowired
-    public PDFMakerController(PDFMakerService pdfMakerService) {
-        this.pdfMakerService = pdfMakerService;
+    public TicketMakerController(TicketMakerService ticketMakerService) {
+        this.ticketMakerService = ticketMakerService;
     }
 
     @GetMapping
@@ -40,6 +39,6 @@ public class PDFMakerController {
         String headerValue = "attachment; filename=Ticket_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
 
-        this.pdfMakerService.export(response, name, firstName, lastName, location);
+        this.ticketMakerService.export(response, name, firstName, lastName, location);
     }
 }

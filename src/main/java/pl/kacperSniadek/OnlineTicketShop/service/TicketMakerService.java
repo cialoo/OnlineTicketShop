@@ -8,19 +8,19 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class PDFMakerService {
+public class TicketMakerService {
     public void export(HttpServletResponse response, String NameOfTicket, String firstName, String lastName, String location ) throws IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
-        Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        Font fontTitle = FontFactory.getFont(FontFactory.TIMES_BOLD);
         fontTitle.setSize(18);
 
         Paragraph paragraph = new Paragraph(NameOfTicket, fontTitle);
         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
 
-        Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
+        Font fontParagraph = FontFactory.getFont(FontFactory.TIMES);
         fontParagraph.setSize(12);
 
         Paragraph paragraph2 = new Paragraph("Your ticket to show!", fontParagraph);
